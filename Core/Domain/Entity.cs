@@ -1,4 +1,4 @@
-﻿namespace Demo.Core
+﻿namespace Demo.Core.Domain
 {
     public class Entity
     {
