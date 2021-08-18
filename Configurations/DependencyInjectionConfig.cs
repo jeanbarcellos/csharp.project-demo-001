@@ -1,4 +1,6 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Demo.Data;
+using Demo.Repositories;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 
 namespace Demo.Configurations
@@ -9,7 +11,8 @@ namespace Demo.Configurations
         {
             if (services == null) throw new ArgumentNullException(nameof(services));
 
-
+            services.AddScoped<DemoContext>();
+            services.AddScoped<CategoryRepository>();
         }
     }
 }
