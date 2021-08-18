@@ -1,4 +1,6 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using Demo.Data;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 
@@ -11,7 +13,8 @@ namespace Demo.Configurations
             if (services == null) throw new ArgumentNullException(nameof(services));
             if (configuration == null) throw new ArgumentException(nameof(configuration));
 
-
+            services.AddDbContext<DemoContext>(options =>
+                options.UseNpgsql(configuration.GetConnectionString("Default")));
         }
     }
 }
