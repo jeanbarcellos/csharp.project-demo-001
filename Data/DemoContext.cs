@@ -17,6 +17,8 @@ namespace Demo.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.UseSerialColumns();
+
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(CategoryMapping).Assembly);
         }
 

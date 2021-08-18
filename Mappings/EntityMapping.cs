@@ -26,7 +26,6 @@ namespace Demo.Mappings
             return _tableName;
         }
 
-
         public virtual void Configure(EntityTypeBuilder<T> builder)
         {
             ConfigureTable(builder);
@@ -53,7 +52,9 @@ namespace Demo.Mappings
         {
             builder.Property(c => c.Id)
                 .IsRequired()
-                .HasColumnName("id");
+                .HasColumnName("serial")
+                .HasColumnName("id")
+                .ValueGeneratedOnAdd(); ;
 
             return builder;
         }
