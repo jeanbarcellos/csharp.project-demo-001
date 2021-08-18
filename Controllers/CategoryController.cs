@@ -1,121 +1,120 @@
 ﻿using Demo.Entities;
+using Demo.Repositories;
 using Demo.ViewModel;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Demo.Controllers
 {
-    [ApiController]
     [Route("/categories")]
-    public class CategoryController : Controller
+    public class CategoryController : ApiController
     {
+        private readonly CategoryRepository _categoryRepository;
+
+        public CategoryController(CategoryRepository categoryRepository)
+        {
+            _categoryRepository = categoryRepository;
+        }
+
         [HttpGet]
         [Route("")]
-        public IActionResult Index()
+        public async Task<IEnumerable<Category>> IndexAsync()
         {
-            var categories = new List<Category>();
-
-            categories.Add(new Category
-            {
-                Id = 1,
-                Name = "Family",
-                CreatedAt = DateTime.Now,
-                UpdatedAt = DateTime.Now
-            });
-
-            categories.Add(new Category
-            {
-                Id = 2,
-                Name = "Work",
-                CreatedAt = DateTime.Now,
-                UpdatedAt = DateTime.Now
-            });
-
-            categories.Add(new Category
-            {
-                Id = 3,
-                Name = "Todos",
-                CreatedAt = DateTime.Now,
-                UpdatedAt = DateTime.Now
-            });
-
-            categories.Add(new Category
-            {
-                Id = 4,
-                Name = "Prior",
-                CreatedAt = DateTime.Now,
-                UpdatedAt = DateTime.Now
-            });
-
-            categories.Add(new Category
-            {
-                Id = 5,
-                Name = "Personal",
-                CreatedAt = DateTime.Now,
-                UpdatedAt = DateTime.Now
-            });
-
-            categories.Add(new Category
-            {
-                Id = 6,
-                Name = "Friends",
-                CreatedAt = DateTime.Now,
-                UpdatedAt = DateTime.Now
-            });
-
-            return Ok(categories);
+            return await _categoryRepository.GetAll();
         }
 
         [HttpGet]
         [Route("{id:int}")]
-        public IActionResult Show(int id)
+        public async Task<IActionResult> Show(int id)
         {
-            return Ok();
+            var result = await _categoryRepository.GetById(id);
+
+            if (result == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(result);
         }
 
         [HttpPost]
         [Route("")]
-        public IActionResult Insert([FromBody] CategoryViewModel categoryViewModel)
+        public async Task<IActionResult> Insert([FromBody] CategoryViewModel categoryViewModel)
         {
-            var id = new Random();
+            if (!ModelState.IsValid)
+            {
+                return ResponseValidation(ModelState);
+            }
 
             var category = new Category
             {
-                Id = id.Next(10, 100),
                 Name = categoryViewModel.Name,
-                CreatedAt = DateTime.Now,
-                UpdatedAt = DateTime.Now
             };
 
-            return Ok(category);
+            categoryViewModel.Id = _categoryRepository.Insert(category);
+
+            await _categoryRepository.UnitOfWork.Commit();
+
+            return CreatedAtAction(nameof(Show), new { id = category.Id }, category);
         }
 
         [HttpPut]
         [Route("{id:int}")]
-        public IActionResult Update(int id, [FromBody] CategoryViewModel categoryViewModel)
+        public async Task<IActionResult> Update(int id, [FromBody] CategoryViewModel categoryViewModel)
         {
-            var category = new Category
+            if (!ModelState.IsValid)
             {
-                Id = id,
-                Name = categoryViewModel.Name,
-                CreatedAt = DateTime.Now,
-                UpdatedAt = DateTime.Now
-            };
+                return ResponseValidation(ModelState);
+            }
+
+            if (categoryViewModel == null || id == null || categoryViewModel.Id == null)
+            {
+                return NotFound();
+            }
+
+            var category = await _categoryRepository.GetById(id);
+
+            if (category == null)
+            {
+                return NotFound();
+            }
+
+            category.Name = categoryViewModel.Name;
+
+            await _categoryRepository.UnitOfWork.Commit();
 
             return Ok(category);
         }
 
         [HttpDelete]
         [Route("{id:int}")]
-        public IActionResult Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
-            var result = new Dictionary<string, string>
+            if (id == null)
             {
-                { "message", "Category successfully deleted" }
+                return NotFound();
+            }
+
+            var result = await _categoryRepository.Exists(id);
+
+            if (!result)
+            {
+                return NotFound();
+            }
+
+            _categoryRepository.Delete(id);
+
+            await _categoryRepository.UnitOfWork.Commit();
+
+            var resultViewModel = new ResultViewModel
+            {
+                Message = "Categoria excluída com sucesso",
+                Data = new { Id = id }
             };
 
-            return Ok(result);
+            return Ok(resultViewModel);
         }
     }
 }
