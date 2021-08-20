@@ -30,31 +30,31 @@ namespace Demo.Repositories
             return await _context.Categories.FindAsync(id);
         }
 
-        public int Insert(Category apartment)
+        public int Insert(Category category)
         {
-            _context.Categories.Add(apartment);
+            _context.Categories.Add(category);
 
-            return apartment.Id;
+            return category.Id;
         }
 
-        public void Update(Category apartment)
+        public void Update(Category category)
         {
-            _context.Categories.Update(apartment);
+            _context.Categories.Update(category);
         }
 
-        public void Delete(Category apartment)
+        public void Delete(Category category)
         {
-            _context.Categories.Remove(apartment);
+            _context.Categories.Remove(category);
         }
 
         public void Delete(int id)
         {
-            //var apartment = _context.Categories.SingleOrDefaultAsync(s => s.Id == id);
-            var apartment = _context.Categories.Find(id);
+            //var category = _context.Categories.SingleOrDefaultAsync(s => s.Id == id);
+            var category = _context.Categories.Find(id);
 
-            if (apartment != null)
+            if (category != null)
             {
-                Delete(apartment);
+                Delete(category);
             }
         }
 

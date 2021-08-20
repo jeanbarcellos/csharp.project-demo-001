@@ -69,7 +69,7 @@ namespace Demo.Controllers
                 return ResponseValidation(ModelState);
             }
 
-            if (categoryViewModel == null || id == null || categoryViewModel.Id == null)
+            if (categoryViewModel == null || id == 0 || categoryViewModel.Id == null)
             {
                 return NotFound();
             }
@@ -92,7 +92,7 @@ namespace Demo.Controllers
         [Route("{id:int}")]
         public async Task<IActionResult> Delete(int id)
         {
-            if (id == null)
+            if (id == 0)
             {
                 return NotFound();
             }
