@@ -1,5 +1,5 @@
-﻿using Demo.Api.Entities;
-using Demo.Api.Repositories;
+﻿using Demo.Domain.Entities;
+using Demo.Data.Repositories;
 using Demo.Api.ViewModel;
 using Microsoft.AspNetCore.Mvc;
 using System;

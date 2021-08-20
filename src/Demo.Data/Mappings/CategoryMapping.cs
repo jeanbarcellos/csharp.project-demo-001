@@ -1,8 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Demo.Api.Entities;
+using Demo.Domain.Entities;
 
-namespace Demo.Api.Mappings
+namespace Demo.Data.Mappings
 {
     public class CategoryMapping : EntityMapping<Category>
     {

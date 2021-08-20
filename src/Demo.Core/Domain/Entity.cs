@@ -1,4 +1,4 @@
-﻿namespace Demo.Api.Core.Domain
+﻿namespace Demo.Core.Domain
 {
     public class Entity
     {

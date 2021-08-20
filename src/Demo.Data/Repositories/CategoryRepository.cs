@@ -1,11 +1,10 @@
-﻿using Demo.Api.Core.Data;
-using Demo.Api.Data;
-using Demo.Api.Entities;
+﻿using Demo.Core.Data;
+using Demo.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Demo.Api.Repositories
+namespace Demo.Data.Repositories
 {
     public class CategoryRepository : IRepository<Category>
     {

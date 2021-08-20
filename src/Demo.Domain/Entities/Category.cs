@@ -1,7 +1,7 @@
-﻿using Demo.Api.Core.Domain;
+﻿using Demo.Core.Domain;
 using System;
 
-namespace Demo.Api.Entities
+namespace Demo.Domain.Entities
 {
     public class Category : Entity, IAggregateRoot
     {

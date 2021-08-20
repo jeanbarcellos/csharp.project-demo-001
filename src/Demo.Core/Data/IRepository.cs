@@ -1,7 +1,7 @@
-﻿using Demo.Api.Core.Domain;
+﻿using Demo.Core.Domain;
 using System;
 
-namespace Demo.Api.Core.Data
+namespace Demo.Core.Data
 {
     public interface IRepository<T> : IDisposable where T : IAggregateRoot
     {

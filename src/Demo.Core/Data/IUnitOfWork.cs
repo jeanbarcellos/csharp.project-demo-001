@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace Demo.Api.Core.Data
+namespace Demo.Core.Data
 {
     public interface IUnitOfWork
     {

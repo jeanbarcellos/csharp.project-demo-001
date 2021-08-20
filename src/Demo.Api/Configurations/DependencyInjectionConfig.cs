@@ -1,5 +1,5 @@
-﻿using Demo.Api.Data;
-using Demo.Api.Repositories;
+﻿using Demo.Data;
+using Demo.Data.Repositories;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 

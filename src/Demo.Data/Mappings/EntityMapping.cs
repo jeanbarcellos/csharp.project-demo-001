@@ -1,9 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Demo.Api.Core.Domain;
-using Demo.Api.Core.Extensions;
+using Demo.Core.Domain;
+using Demo.Core.Extensions;
 
-namespace Demo.Api.Mappings
+namespace Demo.Data.Mappings
 {
     public abstract class EntityMapping<T> : IEntityTypeConfiguration<T>
         where T : Entity

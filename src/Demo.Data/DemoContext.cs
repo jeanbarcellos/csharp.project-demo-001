@@ -1,12 +1,12 @@
-using Demo.Api.Core.Data;
-using Demo.Api.Entities;
-using Demo.Api.Mappings;
+using Demo.Core.Data;
+using Demo.Domain.Entities;
+using Demo.Data.Mappings;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Demo.Api.Data
+namespace Demo.Data
 {
     public class DemoContext : DbContext, IUnitOfWork
     {

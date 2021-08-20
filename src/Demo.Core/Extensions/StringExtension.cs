@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 
-namespace Demo.Api.Core.Extensions
+namespace Demo.Core.Extensions
 {
     public static class StringExtension
     {
