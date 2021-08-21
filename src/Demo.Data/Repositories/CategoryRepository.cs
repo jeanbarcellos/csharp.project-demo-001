@@ -1,12 +1,13 @@
 ﻿using Demo.Core.Data;
 using Demo.Domain.Entities;
+using Demo.Domain.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Demo.Data.Repositories
 {
-    public class CategoryRepository : IRepository<Category>
+    public class CategoryRepository : ICategoryRepository
     {
         protected readonly DemoContext _context;
 
@@ -27,6 +28,11 @@ namespace Demo.Data.Repositories
         public async Task<Category> GetById(int id)
         {
             return await _context.Categories.FindAsync(id);
+        }
+
+        public async Task<bool> Exists(int id)
+        {
+            return await _context.Categories.AnyAsync(e => e.Id == id);
         }
 
         public int Insert(Category category)
@@ -55,11 +61,6 @@ namespace Demo.Data.Repositories
             {
                 Delete(category);
             }
-        }
-
-        public async Task<bool> Exists(int id)
-        {
-            return await _context.Categories.AnyAsync(e => e.Id == id);
         }
 
         public void Dispose()

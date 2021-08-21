@@ -1,19 +1,18 @@
 ﻿using Demo.Domain.Entities;
-using Demo.Data.Repositories;
 using Demo.Api.ViewModel;
 using Microsoft.AspNetCore.Mvc;
-using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Demo.Domain.Interfaces;
 
 namespace Demo.Api.Controllers
 {
     [Route("/categories")]
     public class CategoryController : ApiController
     {
-        private readonly CategoryRepository _categoryRepository;
+        private readonly ICategoryRepository _categoryRepository;
 
-        public CategoryController(CategoryRepository categoryRepository)
+        public CategoryController(ICategoryRepository categoryRepository)
         {
             _categoryRepository = categoryRepository;
         }

@@ -1,5 +1,6 @@
 ﻿using Demo.Data;
 using Demo.Data.Repositories;
+using Demo.Domain.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 
@@ -12,7 +13,8 @@ namespace Demo.Api.Configurations
             if (services == null) throw new ArgumentNullException(nameof(services));
 
             services.AddScoped<DemoContext>();
-            services.AddScoped<CategoryRepository>();
+
+            services.AddScoped<ICategoryRepository, CategoryRepository>();
         }
     }
 }
