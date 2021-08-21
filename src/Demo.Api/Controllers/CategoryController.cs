@@ -47,10 +47,7 @@ namespace Demo.Api.Controllers
                 return ResponseValidation(ModelState);
             }
 
-            var category = new Category
-            {
-                Name = categoryViewModel.Name,
-            };
+            var category = new Category(categoryViewModel.Name);
 
             categoryViewModel.Id = _categoryRepository.Insert(category);
 
@@ -80,7 +77,7 @@ namespace Demo.Api.Controllers
                 return NotFound();
             }
 
-            category.Name = categoryViewModel.Name;
+            category.SetName(categoryViewModel.Name);
 
             await _categoryRepository.UnitOfWork.Commit();
 
