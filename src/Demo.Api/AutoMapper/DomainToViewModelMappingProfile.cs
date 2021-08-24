@@ -9,6 +9,7 @@ namespace Demo.Api.AutoMapper
         public DomainToViewModelMappingProfile()
         {
             CreateMap<Category, CategoryViewModel>();
+            CreateMap<Product, ProductViewModel>();
         }
     }
 }

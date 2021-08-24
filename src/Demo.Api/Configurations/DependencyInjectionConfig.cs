@@ -15,6 +15,7 @@ namespace Demo.Api.Configurations
             services.AddScoped<DemoContext>();
 
             services.AddScoped<ICategoryRepository, CategoryRepository>();
+            services.AddScoped<IProductRepository, ProductRepository>();
         }
     }
 }
