@@ -11,6 +11,7 @@ namespace Demo.Data
     public class DemoContext : DbContext, IUnitOfWork
     {
         public DbSet<Category> Categories { get; set; }
+        public DbSet<Product> Products { get; set; }
 
         public DemoContext(DbContextOptions<DemoContext> options)
         : base(options) { }
