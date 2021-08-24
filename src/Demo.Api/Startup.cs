@@ -24,6 +24,9 @@ namespace Demo
             // DBContexts Settings
             services.AddDatabaseConfiguration(Configuration);
 
+            // AutoMapper Settings
+            services.AddAutoMapperConfiguration();
+
             // DI Abstraction
             services.AddDependencyInjectionConfiguration();
 
