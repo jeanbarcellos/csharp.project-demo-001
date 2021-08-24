@@ -4,24 +4,29 @@ using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Demo.Domain.Interfaces;
+using AutoMapper;
 
 namespace Demo.Api.Controllers
 {
     [Route("/categories")]
     public class CategoryController : ApiController
     {
+        private readonly IMapper _mapper;
         private readonly ICategoryRepository _categoryRepository;
 
-        public CategoryController(ICategoryRepository categoryRepository)
+        public CategoryController(IMapper mapper, ICategoryRepository categoryRepository)
         {
+            _mapper = mapper;
             _categoryRepository = categoryRepository;
         }
 
         [HttpGet]
         [Route("")]
-        public async Task<IEnumerable<Category>> IndexAsync()
+        public async Task<IEnumerable<CategoryViewModel>> Index()
         {
-            return await _categoryRepository.GetAll();
+            var categories = await _categoryRepository.GetAll();
+
+            return _mapper.Map<IEnumerable<CategoryViewModel>>(categories);
         }
 
         [HttpGet]
@@ -35,7 +40,7 @@ namespace Demo.Api.Controllers
                 return NotFound();
             }
 
-            return Ok(result);
+            return Ok(_mapper.Map<CategoryViewModel>(result));
         }
 
         [HttpPost]
@@ -47,7 +52,7 @@ namespace Demo.Api.Controllers
                 return ResponseValidation(ModelState);
             }
 
-            var category = new Category(categoryViewModel.Name);
+            var category = _mapper.Map<Category>(categoryViewModel);
 
             categoryViewModel.Id = _categoryRepository.Insert(category);
 
@@ -70,18 +75,20 @@ namespace Demo.Api.Controllers
                 return NotFound();
             }
 
-            var category = await _categoryRepository.GetById(id);
+            var result = await _categoryRepository.Exists(id);
 
-            if (category == null)
+            if (!result)
             {
                 return NotFound();
             }
 
-            category.SetName(categoryViewModel.Name);
+            var category = _mapper.Map<Category>(categoryViewModel);
+
+            _categoryRepository.Update(category);
 
             await _categoryRepository.UnitOfWork.Commit();
 
-            return Ok(category);
+            return Ok(_mapper.Map<CategoryViewModel>(category));
         }
 
         [HttpDelete]
