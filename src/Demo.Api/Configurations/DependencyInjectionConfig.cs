@@ -1,8 +1,4 @@
-﻿using Demo.Application.Interfaces;
-using Demo.Application.Services;
-using Demo.Data;
-using Demo.Data.Repositories;
-using Demo.Domain.Interfaces;
+﻿using Demo.Infra.CrossCutting.IoC;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 
@@ -14,12 +10,7 @@ namespace Demo.Api.Configurations
         {
             if (services == null) throw new ArgumentNullException(nameof(services));
 
-            services.AddScoped<DemoContext>();
-
-            services.AddScoped<ICategoryAppService, CategoryAppService>();
-
-            services.AddScoped<ICategoryRepository, CategoryRepository>();
-            services.AddScoped<IProductRepository, ProductRepository>();
+            NativeDependencyInjector.RegisterServices(services);
         }
     }
 }
