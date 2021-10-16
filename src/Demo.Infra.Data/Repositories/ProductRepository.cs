@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Demo.Data.Repositories
+namespace Demo.Infra.Data.Repositories
 {
     public class ProductRepository : IProductRepository
     {

@@ -10,7 +10,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Demo.Api", "src\Demo.Api\De
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Demo.Domain", "src\Demo.Domain\Demo.Domain.csproj", "{91B698BC-CC11-4756-BA0B-DB4430FA8D6D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Demo.Data", "src\Demo.Data\Demo.Data.csproj", "{9BE43198-214F-4C52-A0D5-7D634E9429DB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Demo.Infra.Data", "src\Demo.Infra.Data\Demo.Infra.Data.csproj", "{9BE43198-214F-4C52-A0D5-7D634E9429DB}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Demo.Core", "src\Demo.Core\Demo.Core.csproj", "{D3CE2E70-1AE1-4FC1-90E7-681474A67FB9}"
 EndProject

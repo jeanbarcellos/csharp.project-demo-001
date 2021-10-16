@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Demo.Domain.Entities;
 
-namespace Demo.Data.Mappings
+namespace Demo.Infra.Data.Mappings
 {
     public class ProductMapping : EntityMapping<Product>
     {

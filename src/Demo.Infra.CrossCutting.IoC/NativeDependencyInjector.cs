@@ -1,7 +1,7 @@
 ﻿using Demo.Application.Interfaces;
 using Demo.Application.Services;
-using Demo.Data;
-using Demo.Data.Repositories;
+using Demo.Infra.Data;
+using Demo.Infra.Data.Repositories;
 using Demo.Domain.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
 

@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Demo.Core.Domain;
 using Demo.Core.Extensions;
 
-namespace Demo.Data.Mappings
+namespace Demo.Infra.Data.Mappings
 {
     public abstract class EntityMapping<T> : IEntityTypeConfiguration<T>
         where T : Entity
