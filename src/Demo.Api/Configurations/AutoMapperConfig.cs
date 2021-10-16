@@ -1,4 +1,4 @@
-﻿using Demo.Api.AutoMapper;
+﻿using Demo.Application.AutoMapper;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 

@@ -1,46 +1,40 @@
-﻿using Demo.Domain.Entities;
-using Demo.Api.ViewModel;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Demo.Domain.Interfaces;
-using AutoMapper;
+using Demo.Application.Interfaces;
+using Demo.Application.ViewModel;
 
 namespace Demo.Api.Controllers
 {
     [Route("/products")]
     public class ProductController : ApiController
     {
-        private readonly IMapper _mapper;
-        private readonly IProductRepository _productRepository;
+        private readonly IProductAppService _productAppService;
 
-        public ProductController(IMapper mapper, IProductRepository productRepository)
+        public ProductController(IProductAppService productAppService)
         {
-            _mapper = mapper;
-            _productRepository = productRepository;
+            _productAppService = productAppService;
         }
 
         [HttpGet]
         [Route("")]
         public async Task<IEnumerable<ProductViewModel>> Index()
         {
-            var products = await _productRepository.GetAll();
-
-            return _mapper.Map<IEnumerable<ProductViewModel>>(products);
+            return await _productAppService.GetAll();
         }
 
         [HttpGet]
         [Route("{id:int}")]
         public async Task<IActionResult> Show(int id)
         {
-            var result = await _productRepository.GetById(id);
+            var result = await _productAppService.GetById(id);
 
             if (result == null)
             {
                 return NotFound();
             }
 
-            return Ok(_mapper.Map<ProductViewModel>(result));
+            return Ok(result);
         }
 
         [HttpPost]
@@ -52,13 +46,9 @@ namespace Demo.Api.Controllers
                 return ResponseValidation(ModelState);
             }
 
-            var product = _mapper.Map<Product>(productViewModel);
+            productViewModel = await _productAppService.Add(productViewModel);
 
-            productViewModel.Id = _productRepository.Insert(product);
-
-            await _productRepository.UnitOfWork.Commit();
-
-            return CreatedAtAction(nameof(Show), new { id = product.Id }, product);
+            return CreatedAtAction(nameof(Show), new { productViewModel.Id }, productViewModel);
         }
 
         [HttpPut]
@@ -75,20 +65,16 @@ namespace Demo.Api.Controllers
                 return NotFound();
             }
 
-            var result = await _productRepository.Exists(id);
+            var result = await _productAppService.Exists(id);
 
             if (!result)
             {
                 return NotFound();
             }
 
-            var product = _mapper.Map<Product>(productViewModel);
+            productViewModel = await _productAppService.Update(productViewModel);
 
-            _productRepository.Update(product);
-
-            await _productRepository.UnitOfWork.Commit();
-
-            return Ok(_mapper.Map<ProductViewModel>(product));
+            return Ok(productViewModel);
         }
     }
 }

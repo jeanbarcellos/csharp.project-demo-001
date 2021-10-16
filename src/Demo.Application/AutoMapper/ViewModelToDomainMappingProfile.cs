@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
-using Demo.Api.ViewModel;
+using Demo.Application.ViewModel;
 using Demo.Domain.Entities;
 
-namespace Demo.Api.AutoMapper
+namespace Demo.Application.AutoMapper
 {
     public class ViewModelToDomainMappingProfile : Profile
     {

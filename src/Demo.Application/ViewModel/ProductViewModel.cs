@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace Demo.Api.ViewModel
+namespace Demo.Application.ViewModel
 {
     public class ProductViewModel
     {
