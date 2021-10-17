@@ -16,6 +16,7 @@ namespace Demo.Infra.CrossCutting.IoC
 
             // Application
             services.AddScoped<ICategoryAppService, CategoryAppService>();
+            services.AddScoped<IProductAppService, ProductAppService>();
 
             // Data
             services.AddScoped<DemoContext>();
