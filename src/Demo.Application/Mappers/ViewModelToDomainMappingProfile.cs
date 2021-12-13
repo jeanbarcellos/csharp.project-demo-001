@@ -2,7 +2,7 @@
 using Demo.Application.ViewModel;
 using Demo.Domain.Entities;
 
-namespace Demo.Application.AutoMapper
+namespace Demo.Application.Mappers
 {
     public class ViewModelToDomainMappingProfile : Profile
     {
