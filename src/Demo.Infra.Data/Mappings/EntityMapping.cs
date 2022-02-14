@@ -52,9 +52,10 @@ namespace Demo.Infra.Data.Mappings
         {
             builder.Property(c => c.Id)
                 .IsRequired()
-                .HasColumnName("serial")
+                //.HasColumnName("serial")
                 .HasColumnName("id")
-                .ValueGeneratedOnAdd(); ;
+                //.ValueGeneratedOnAdd()
+                ;
 
             return builder;
         }

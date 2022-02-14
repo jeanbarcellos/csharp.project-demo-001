@@ -2,6 +2,7 @@
 using Demo.Domain.Entities;
 using Demo.Domain.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -25,17 +26,17 @@ namespace Demo.Infra.Data.Repositories
                 .ToListAsync();
         }
 
-        public async Task<Product> GetById(int id)
+        public async Task<Product> GetById(Guid id)
         {
             return await _context.Products.FindAsync(id);
         }
 
-        public async Task<bool> Exists(int id)
+        public async Task<bool> Exists(Guid id)
         {
             return await _context.Products.AnyAsync(e => e.Id == id);
         }
 
-        public int Insert(Product product)
+        public Guid Insert(Product product)
         {
             _context.Products.Add(product);
 
@@ -52,7 +53,7 @@ namespace Demo.Infra.Data.Repositories
             _context.Products.Remove(product);
         }
 
-        public void Delete(int id)
+        public void Delete(Guid id)
         {
             var product = _context.Products.Find(id);
 
