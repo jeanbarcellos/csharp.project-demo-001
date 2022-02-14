@@ -5,7 +5,7 @@ namespace Demo.Application.ViewModel
 {
     public class CategoryViewModel
     {
-        public int? Id { get; set; }
+        public Guid? Id { get; set; }
 
         [Required(ErrorMessage = "Este campo é obrigatório")]
         [MinLength(3, ErrorMessage = "Este campo deve conter entre 3 e 60 caracteres")]

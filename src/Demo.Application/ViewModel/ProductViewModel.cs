@@ -6,10 +6,10 @@ namespace Demo.Application.ViewModel
     public class ProductViewModel
     {
         [Key]
-        public int? Id { get; set; }
+        public Guid? Id { get; set; }
 
         [Required(ErrorMessage = "O {0} é obrigatório.")]
-        public int CategoryId { get; set; }
+        public Guid CategoryId { get; set; }
 
         [Required(ErrorMessage = "O {0} é obrigatório.")]
         public string Name { get; set; }

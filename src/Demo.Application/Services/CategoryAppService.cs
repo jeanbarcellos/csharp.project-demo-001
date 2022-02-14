@@ -3,6 +3,7 @@ using Demo.Application.Interfaces;
 using Demo.Application.ViewModel;
 using Demo.Domain.Entities;
 using Demo.Domain.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -24,12 +25,12 @@ namespace Demo.Application.Services
             return _mapper.Map<IEnumerable<CategoryViewModel>>(await _categoryRepository.GetAll());
         }
 
-        public async Task<CategoryViewModel> GetById(int id)
+        public async Task<CategoryViewModel> GetById(Guid id)
         {
             return _mapper.Map<CategoryViewModel>(await _categoryRepository.GetById(id));
         }
 
-        public async Task<bool> Exists(int id)
+        public async Task<bool> Exists(Guid id)
         {
             return await _categoryRepository.Exists(id);
         }
@@ -65,7 +66,7 @@ namespace Demo.Application.Services
             await _categoryRepository.UnitOfWork.Commit();
         }
 
-        public async Task Delete(int id)
+        public async Task Delete(Guid id)
         {
             _categoryRepository.Delete(id);
 

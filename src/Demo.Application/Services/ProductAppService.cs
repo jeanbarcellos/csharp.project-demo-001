@@ -3,6 +3,7 @@ using Demo.Application.Interfaces;
 using Demo.Application.ViewModel;
 using Demo.Domain.Entities;
 using Demo.Domain.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -24,12 +25,12 @@ namespace Demo.Application.Services
             return _mapper.Map<IEnumerable<ProductViewModel>>(await _productRepository.GetAll());
         }
 
-        public async Task<ProductViewModel> GetById(int id)
+        public async Task<ProductViewModel> GetById(Guid id)
         {
             return _mapper.Map<ProductViewModel>(await _productRepository.GetById(id));
         }
 
-        public async Task<bool> Exists(int id)
+        public async Task<bool> Exists(Guid id)
         {
             return await _productRepository.Exists(id);
         }
