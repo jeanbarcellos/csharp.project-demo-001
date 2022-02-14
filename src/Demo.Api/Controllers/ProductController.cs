@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Demo.Application.Interfaces;
 using Demo.Application.ViewModel;
+using System;
 
 namespace Demo.Api.Controllers
 {
@@ -24,8 +25,8 @@ namespace Demo.Api.Controllers
         }
 
         [HttpGet]
-        [Route("{id:int}")]
-        public async Task<IActionResult> Show(int id)
+        [Route("{id:guid}")]
+        public async Task<IActionResult> Show(Guid id)
         {
             var result = await _productAppService.GetById(id);
 
@@ -52,15 +53,15 @@ namespace Demo.Api.Controllers
         }
 
         [HttpPut]
-        [Route("{id:int}")]
-        public async Task<IActionResult> Update(int id, [FromBody] ProductViewModel productViewModel)
+        [Route("{id:guid}")]
+        public async Task<IActionResult> Update(Guid id, [FromBody] ProductViewModel productViewModel)
         {
             if (!ModelState.IsValid)
             {
                 return ResponseValidation(ModelState);
             }
 
-            if (productViewModel == null || id == 0 || productViewModel.Id == null)
+            if (productViewModel == null || id == Guid.Empty || productViewModel.Id == null)
             {
                 return NotFound();
             }
