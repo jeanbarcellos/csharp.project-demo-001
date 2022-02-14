@@ -1,7 +1,9 @@
-﻿namespace Demo.Core.Domain
+﻿using System;
+
+namespace Demo.Core.Domain
 {
     public class Entity
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
     }
 }
