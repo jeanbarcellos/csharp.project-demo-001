@@ -16,7 +16,7 @@ namespace Demo.Domain.Entities
         public DateTime UpdatedAt { get; private set; }
 
         // EF Relation
-        public int CategoryId { get; private set; }
+        public Guid CategoryId { get; private set; }
 
         // EF
         protected Product()
